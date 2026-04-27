@@ -1,15 +1,12 @@
-# Training and Fine-tuning based on MambaVision Backbone
-Training MambaVision-based model on Object Detection and Semantic Segmentation with subdataset. Also, fine-tuning + training MambaVision-based model for Face Parsing on LaPa Dataset.
-
-## MambaVision with Mask2Former for Face Parsing (LaPa Dataset)
+# MambaVision with Mask2Former for Face Parsing (LaPa Dataset)
 
 This repository includes the fine-tuning of the **MambaVision** backbone integrated with the **Mask2Former** architecture for Face Parsing on the **LaPa Dataset**. 
 
-### 🔗 Model Links
+## 🔗 Model Links
 * **Hugging Face Model Page**: [tawannt/mamba-vision-b-mask2former-for-face-parsing](https://huggingface.co/tawannt/mamba-vision-b-mask2former-for-face-parsing)
 * **Direct Download Link**: [mambavision_b_mask2former_face_parsing.pth](https://huggingface.co/tawannt/mamba-vision-b-mask2former-for-face-parsing/resolve/main/mambavision_b_mask2former_face_parsing.pth)
 
-### 📊 Performance Metrics
+## 📊 Performance Metrics
 The model was evaluated on the test set of the LaPa dataset with the following global metrics:
 
 | Metric | Score |
@@ -24,7 +21,7 @@ The model was evaluated on the test set of the LaPa dataset with the following g
 
 **Inference Time:** ~0.2738s/img | **Data Time:** 0.0035s
 
-### 🎯 Per-Class Metrics
+## 🎯 Per-Class Metrics
 
 | Class | IoU (%) | Acc (%) | Dice (%) | Fscore (%) | Precision (%) | Recall (%) |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -40,7 +37,7 @@ The model was evaluated on the test set of the LaPa dataset with the following g
 | **lower_lip** | 76.60 | 87.26 | 86.75 | 86.75 | 86.25 | 87.26 |
 | **hair** | 85.13 | 92.42 | 91.97 | 91.97 | 91.52 | 92.42 |
 
-### ⚙️ Training Configuration (Optimal Settings)
+## ⚙️ Training Configuration (Optimal Settings)
 
 The optimal configuration used for training the model based on `mmsegmentation`:
 - **Environment:** Google Colab (GPU: T4, 16GB RAM)
