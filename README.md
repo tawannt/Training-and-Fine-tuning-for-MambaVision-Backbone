@@ -88,12 +88,12 @@ The model was evaluated on the test set of the LaPa dataset with the following g
 The optimal configuration used for training the model based on `mmsegmentation`:
 - **Environment:** Google Colab (GPU: T4, 16GB RAM)
 - **Optimizer Strategy (Phase 3 Micro-LR):**
-  - Scheduler: `PolyLR` (power=0.9)
+  - Scheduler: `PolyLR` (`power = 0.9`)
   - Backbone Learning Rate Multiplier: `0.01`, `0.1`, `0.2`
   - Query Embed / Query Feat / Level Embed LR Multiplier: `1.0`
 - **Data & Batch:**
   - Dataset: `BaseSegDataset` targeting LaPa format
-  - Batch Size: `2` (Accumulative counts: `8` -> Virtual Batch Size: `16`)
+  - Batch Size: `2` (Accumulative counts: `8` $\rightarrow$ Virtual Batch Size: `16`)
 
 ### Sample Inference
 ![Sample Inference](./img/MambaVision%20-%20Finetuning/Mask2Former/mask2former.png)
