@@ -72,7 +72,14 @@ $$Var_x = \frac{1}{N} \sum_{i=1}^{N} (cx_i - \mu_{cx})^2 \quad ; \quad Var_y = \
 
 ---
 
+## 🔗 Model Links
+* **Hugging Face Model Page**: [tawannt/mambavision-b-mask2former-data-processing-face-parsing](https://huggingface.co/tawannt/mambavision-b-mask2former-data-processing-face-parsing)
+* **Direct Download Link**: [mambavision_b_mask2former_data_processing_face_parsing.pth](https://huggingface.co/tawannt/mambavision-b-mask2former-data-processing-face-parsing/resolve/main/mambavision_b_mask2former_data_processing_face_parsing.pth)
+
+
+
 ## 🚀 Performance on Processed Test Set
+
 
 ### Convergence Plot
 ![Convergence Plot](../../img/MambaVision%20-%20Finetuning/Data%20Engineering/convergence_plot.png)

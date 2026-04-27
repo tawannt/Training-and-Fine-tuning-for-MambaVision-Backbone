@@ -104,6 +104,11 @@ The optimal configuration used for training the model based on `mmsegmentation`:
 
 ## 🛠 Data Engineering & Preprocessing (Facial Landmarks)
 
+### 🔗 Model Links
+* **Hugging Face Model Page**: [tawannt/mambavision-b-mask2former-data-processing-face-parsing](https://huggingface.co/tawannt/mambavision-b-mask2former-data-processing-face-parsing)
+* **Direct Download Link**: [mambavision_b_mask2former_data_processing_face_parsing.pth](https://huggingface.co/tawannt/mambavision-b-mask2former-data-processing-face-parsing/resolve/main/mambavision_b_mask2former_data_processing_face_parsing.pth)
+
+
 To maximize the model's performance on the LaPa Dataset, we implemented a robust **Facial Landmark-based Preprocessing Pipeline**. This step mathematically aligns and crops faces to a strict 1:1 square ratio, drastically increasing the Signal-to-Noise Ratio (SNR) and eliminating spatial variance.
 
 For a deep dive into the mathematical formulas, padding logic, and exact interpolation algorithms, please see the detailed documentation: 
