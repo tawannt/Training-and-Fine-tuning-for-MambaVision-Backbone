@@ -1,6 +1,7 @@
 # Training and Fine-tuning based on MambaVision Backbone
 Training MambaVision-based model on Object Detection and Semantic Segmentation with subdataset. Also, fine-tuning + training MambaVision-based model for Face Parsing on LaPa Dataset.
 
+---
 
 ## Fine-tuning: MambaVision with UperNet for Face Parsing (LaPa Dataset)
 
@@ -97,3 +98,67 @@ The optimal configuration used for training the model based on `mmsegmentation`:
 
 ### Sample Inference
 ![Sample Inference](./img/MambaVision%20-%20Finetuning/Mask2Former/mask2former.png)
+
+
+---
+
+## 🛠 Data Engineering & Preprocessing (Facial Landmarks)
+
+To maximize the model's performance on the LaPa Dataset, we implemented a robust **Facial Landmark-based Preprocessing Pipeline**. This step mathematically aligns and crops faces to a strict 1:1 square ratio, drastically increasing the Signal-to-Noise Ratio (SNR) and eliminating spatial variance.
+
+For a deep dive into the mathematical formulas, padding logic, and exact interpolation algorithms, please see the detailed documentation: 
+👉 **[Data Engineering README](./MambaVision%20-%20Finetuning/Data%20Engineer/README.md)**
+
+![Bounding Box Refinement](./img/MambaVision%20-%20Finetuning/Data%20Engineering/visualize_bbox_refinement.png)
+---
+### 📉 Alignment Noise Reduction Assessment
+
+By evaluating the dataset before and after the alignment process, we observed a massive improvement in data quality:
+
+| Metric | Raw Dataset | Aligned Dataset |
+| :--- | :---: | :---: |
+| **Mean SNR** | 0.4954 | **4.0267** |
+| **Std SNR** | 0.3042 | **9.9422** |
+| **X-Center Variance** | 0.00271 | **0.00106** |
+| **Y-Center Variance** | 0.00657 | **0.00160** |
+
+*Evaluation:* The preprocessing yields an **$8\times$ increase in Mean SNR** and significantly minimizes the spatial variance of the face's center of mass. This guarantees that the MambaVision backbone focuses entirely on learning fine-grained semantic facial features (eyes, nose, lips) rather than struggling with random scale and positional shifts.
+### 🚀 Performance on Processed Test Set
+
+**Convergence Plot**
+![Convergence Plot](./img/MambaVision%20-%20Finetuning/Data%20Engineering/convergence_plot.png)
+
+By applying this landmark-based preprocessing pipeline to align and crop the test set, the model's performance improves significantly. Below are the metrics evaluated on the **processed LaPa test set**:
+
+**Global Metrics:**
+
+| Metric | Score |
+| --- | --- |
+| **aAcc** | 96.38% |
+| **mIoU** | 85.65% |
+| **mAcc** | 91.67% |
+| **mDice** | 92.16% |
+| **mFscore** | 92.16% |
+| **mPrecision** | 92.67% |
+| **mRecall** | 91.67% |
+
+**Inference Time:** ~0.2574s/img | **Data Time:** 0.0030s
+
+**Per-Class Metrics:**
+
+| Class | IoU (%) | Acc (%) | Dice (%) | Fscore (%) | Precision (%) | Recall (%) |
+| --- | --- | --- | --- | --- | --- | --- |
+| **background** | 93.70 | 96.39 | 96.75 | 96.75 | 97.11 | 96.39 |
+| **skin** | 95.22 | 97.68 | 97.55 | 97.55 | 97.43 | 97.68 |
+| **left_eyebrow** | 82.21 | 89.86 | 90.24 | 90.24 | 90.62 | 89.86 |
+| **right_eyebrow**| 81.91 | 89.44 | 90.06 | 90.06 | 90.68 | 89.44 |
+| **left_eye** | 84.01 | 89.47 | 91.31 | 91.31 | 93.23 | 89.47 |
+| **right_eye** | 84.54 | 91.07 | 91.63 | 91.63 | 92.19 | 91.07 |
+| **nose** | 93.81 | 96.64 | 96.80 | 96.80 | 96.97 | 96.64 |
+| **upper_lip** | 76.94 | 86.21 | 86.97 | 86.97 | 87.74 | 86.21 |
+| **inner_mouth** | 81.27 | 89.50 | 89.67 | 89.67 | 89.84 | 89.50 |
+| **lower_lip** | 80.24 | 87.73 | 89.04 | 89.04 | 90.39 | 87.73 |
+| **hair** | 88.27 | 94.39 | 93.77 | 93.77 | 93.15 | 94.39 |
+
+**Inference Result:**
+![Inference Result](./img/MambaVision%20-%20Finetuning/Data%20Engineering/inference_result.png)
